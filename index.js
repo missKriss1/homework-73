@@ -1,8 +1,11 @@
 import express from 'express';
-const VigenereCipher = require('vigenere-cipher');
+import pkg from 'caesar-salad';
+const { Vigenere } = pkg;
 
 const app = express();
 const port = 8000;
+
+const password = 'hello';
 
 app.get('/', (req, res) => {
     return res.send('Home page');
@@ -12,9 +15,13 @@ app.get('/hello', (req, res) => {
     return res.send('<h1>Hello!</h1>');
 });
 
-app.get('/password', (req, res) => {
-    return res.send('<h1>Hello!</h1>');
+app.get('/encode/:text', (req, res) => {
+    const { text } = req.params;
+    const cipher =  Vigenere.Cipher(password);
+    const encryptedText = cipher.crypt(text);
+    return res.send(encryptedText);
 });
+
 
 
 app.listen(port, () => {
