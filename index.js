@@ -1,4 +1,5 @@
 import express from 'express';
+const VigenereCipher = require('vigenere-cipher');
 
 const app = express();
 const port = 8000;
@@ -8,6 +9,10 @@ app.get('/', (req, res) => {
 });
 
 app.get('/hello', (req, res) => {
+    return res.send('<h1>Hello!</h1>');
+});
+
+app.get('/password', (req, res) => {
     return res.send('<h1>Hello!</h1>');
 });
 
